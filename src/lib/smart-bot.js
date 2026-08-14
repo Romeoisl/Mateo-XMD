@@ -1,0 +1,25 @@
+const config=require("../config");
+
+function normalize(s){return String(s||"").trim().replace(/\s+/g," ");}
+function stripPrefix(text){const t=normalize(text);if(!t.startsWith(config.prefix))return t;return normalize(t.slice(config.prefix.length));}
+function isMentioned(context){return Boolean(context?.mentionedJids?.length && context.mentionedJids.some(j=>j===context.botJid||String(j).split("@")[0]===String(context.botJid||"").split("@")[0]));}
+function isReply(context){return Boolean(context?.quotedKey && context?.quotedKey.participant && context.quotedKey.participant===context.botJid);}
+function startsWithNickname(text){const name=normalize(config.botNickname);const t=normalize(text);if(!name)return false;return config.smartBot.wake.caseInsensitive?t.toLowerCase().startsWith(name.toLowerCase()):t.startsWith(name);}
+function wake(context){
+  const text=normalize(context.text); if(!text)return {active:false,text};
+  const mode=config.smartBot.mode;
+  if(!config.smartBot.enabled)return {active:text.startsWith(config.prefix),text:stripPrefix(text),reason:"disabled-smart"};
+  if(mode==="command") return {active:!config.smartBot.wake.requirePrefixInCommandMode||text.startsWith(config.prefix),text:stripPrefix(text),reason:"command-mode"};
+  const byName=config.smartBot.wake.allowNickname&&startsWithNickname(text);
+  const byTag=config.smartBot.wake.allowTag&&isMentioned(context);
+  const byReply=config.smartBot.wake.allowReply&&isReply(context);
+  if(!byName&&!byTag&&!byReply)return {active:false,text,reason:"not-addressed"};
+  let cleaned=text;
+  if(byName) cleaned=normalize(cleaned.slice(normalize(config.botNickname).length));
+  cleaned=cleaned.replace(/^[:,\-]\s*/,"");
+  return {active:true,text:normalize(cleaned),reason:byReply?"reply":byTag?"tag":"nickname"};
+}
+function looksLikeCommand(text){const t=normalize(text);if(!t)return false;const p=t.startsWith(config.prefix)?t.slice(config.prefix.length):t;const first=p.split(/\s+/)[0].toLowerCase();return /^[a-z0-9_-]{1,40}$/.test(first)&&(["menu","help","ping","start","stop","owner","group","settings","stats","info","about","sticker","tagall"].includes(first)||t.startsWith(config.prefix));}
+function commandCandidate(text){const t=stripPrefix(text);const words=t.split(/\s+/).filter(Boolean);return {command:(words.shift()||"").toLowerCase(),args:words,rawArgs:words.join(" ")};}
+function classify(text){const t=normalize(text);if(!t)return "empty";if(looksLikeCommand(t))return "command";if(/[?؟]$/.test(t)||/^(who|what|why|when|where|how|can|could|would|is|are|do|does|did|will|should|explain|tell me)\b/i.test(t))return "question";return "chat";}
+module.exports={wake,looksLikeCommand,commandCandidate,classify,normalize};
