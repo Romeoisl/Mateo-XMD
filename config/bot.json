@@ -1,0 +1,11 @@
+{
+  "prefix": ".",
+  "mode": "public",
+  "language": "en",
+  "moderation": {
+    "antiSpam": false,
+    "antiLink": false,
+    "antiCaps": false,
+    "warningLimit": 3
+  }
+}
