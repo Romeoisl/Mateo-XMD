@@ -2,6 +2,19 @@
   "prefix": ".",
   "mode": "public",
   "language": "en",
+  "database": {
+    "type": "json",
+    "json": {
+      "file": "src/database/data.json"
+    },
+    "sqlite": {
+      "file": "src/database/xmd.sqlite"
+    },
+    "mongodb": {
+      "uri": "",
+      "dbName": "xmd"
+    }
+  },
   "moderation": {
     "antiSpam": false,
     "antiLink": false,
