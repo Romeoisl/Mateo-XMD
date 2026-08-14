@@ -1,1 +1,21 @@
-{"name":"xmd-whatsapp-bot","version":"1.0.0","description":"Modular XMD WhatsApp bot core using xmd-baileys.","main":"start.js","scripts":{"start":"node start.js","dev":"node --watch start.js","check":"node --check src/index.js && node --check src/connection/whatsapp.js"},"engines":{"node":">=18"},"dependencies":{"chalk":"^5.4.1","pino":"^9.7.0","qrcode-terminal":"^0.12.0","xmd-baileys":"^1.0.40"}}
+{
+  "name": "xmd-whatsapp-bot",
+  "version": "1.0.0",
+  "description": "A modular XMD-style WhatsApp bot built with Node.js and xmd-baileys.",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js",
+    "dev": "node --watch start.js",
+    "check": "node --check src/index.js && node --check src/connection/whatsapp.js",
+    "test": "node tests/run.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "pino": "^9.7.0",
+    "qrcode-terminal": "^0.12.0",
+    "xmd-baileys": "^1.0.40"
+  }
+}
