@@ -4,6 +4,8 @@
   "language": "en",
   "database": {
     "type": "json",
+    "autoMigrate": true,
+    "healthCheckIntervalMs": 60000,
     "json": {
       "file": "src/database/data.json"
     },
@@ -12,7 +14,8 @@
     },
     "mongodb": {
       "uri": "",
-      "dbName": "xmd"
+      "dbName": "xmd",
+      "collectionPrefix": "xmd_"
     }
   },
   "moderation": {
