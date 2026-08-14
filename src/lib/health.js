@@ -1,0 +1,1 @@
+const {getState}=require("./state"),{getStats}=require("./database");function getHealth(){const s=getState();return{...s,uptimeSeconds:Math.floor(process.uptime()),memoryMb:Math.round(process.memoryUsage().rss/1048576),database:getStats()}}module.exports={getHealth};

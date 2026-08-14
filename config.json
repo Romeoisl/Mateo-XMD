@@ -1,0 +1,1 @@
+{"botName":"XMD WhatsApp Bot","prefix":".","ownerNumbers":["2348000000000"],"pairingCode":false,"pairingNumber":"","publicMode":true,"sessionDir":"./session","mediaDir":"./media","databaseFile":"./src/database/data.json","mediaCleanupMinutes":30,"logLevel":"info"}

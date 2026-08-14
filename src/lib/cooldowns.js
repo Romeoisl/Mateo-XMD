@@ -1,0 +1,1 @@
+const b=new Map();function check(c,s,seconds=0){const d=Math.max(0,Number(seconds)||0)*1000;if(!d)return{allowed:true,remainingMs:0};const k=`${c}:${s}`,now=Date.now(),u=b.get(k)||0;if(u>now)return{allowed:false,remainingMs:u-now};b.set(k,now+d);return{allowed:true,remainingMs:0}}module.exports={check,clear:()=>b.clear()};

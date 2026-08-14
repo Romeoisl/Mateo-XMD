@@ -1,0 +1,1 @@
+let enabled=false,current="unavailable";function configure(v){enabled=Boolean(v)}async function set(sock,p,jid){if(!enabled||!sock?.sendPresenceUpdate)return false;if(jid&&sock.presenceSubscribe)await sock.presenceSubscribe(jid);await sock.sendPresenceUpdate(p,jid);current=p;return true}module.exports={configure,set,status:()=>({enabled,current})};

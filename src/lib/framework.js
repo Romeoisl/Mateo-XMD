@@ -1,0 +1,1 @@
+const events=require("./event-bus"),i=require("./interaction-store");module.exports={events,onReply:(k,h,o={})=>i.addReply(k,{handler:h,...o},o.ttlMs||120000),onReaction:(k,h,o={})=>i.addReaction(k,{handler:h,...o},o.ttlMs||120000),removeReply:i.removeReply,removeReaction:i.removeReaction};

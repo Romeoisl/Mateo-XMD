@@ -1,0 +1,1 @@
+const {getState}=require("./state"),{log}=require("./logger");let t=null,last=null;function startMonitor(ms=30000){if(t)return;t=setInterval(()=>{const s=getState();if(s.status!==last){log(`Health status: ${s.status}`);last=s.status}},ms);t.unref?.()}function stopMonitor(){clearInterval(t);t=null}module.exports={startMonitor,stopMonitor};

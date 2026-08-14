@@ -1,0 +1,1 @@
+node_modules/\nsession/\nauth_info/\nauth_info_baileys/\nmedia/*\n!media/.gitkeep\nsrc/database/*.json\n!src/database/.gitkeep\n.env\n.env.*\n*.log\nlogs/\n.DS_Store\n.vscode/\n.idea/\n
