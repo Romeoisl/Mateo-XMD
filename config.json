@@ -1,1 +1,31 @@
-{"botName":"XMD WhatsApp Bot","prefix":".","ownerNumbers":["2348000000000"],"pairingCode":false,"pairingNumber":"","publicMode":true,"sessionDir":"./session","mediaDir":"./media","databaseFile":"./src/database/data.json","mediaCleanupMinutes":30,"logLevel":"info"}
+{
+  "botName": "XMD WhatsApp Bot",
+  "botNickname": "XMD",
+  "prefix": ".",
+  "ownerNumbers": ["2348000000000"],
+  "pairingCode": false,
+  "pairingNumber": "",
+  "publicMode": true,
+  "smartBot": {
+    "enabled": true,
+    "mode": "command",
+    "ai": {
+      "enabled": false,
+      "thinkingText": "Processing...",
+      "notAvailableText": "That isn't available currently.",
+      "maxPromptLength": 2000
+    },
+    "wake": {
+      "requirePrefixInCommandMode": true,
+      "allowNickname": true,
+      "allowTag": true,
+      "allowReply": true,
+      "caseInsensitive": true
+    }
+  },
+  "sessionDir": "./session",
+  "mediaDir": "./media",
+  "databaseFile": "./src/database/data.json",
+  "mediaCleanupMinutes": 30,
+  "logLevel": "info"
+}
