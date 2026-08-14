@@ -22,6 +22,44 @@ Core-first modular WhatsApp bot engine built around **XMD Baileys**. Command dir
 - Health monitoring, structured logging and graceful shutdown
 - Core smoke tests
 
+## Database integration
+
+XMD supports three selectable database backends through one common API:
+
+- **JSON** — simple local file storage.
+- **SQLite** — local relational storage in `src/database/xmd.sqlite`.
+- **MongoDB** — external document storage for larger/distributed deployments.
+
+Choose the backend in `config/bot.json`:
+
+```json
+{
+  "database": {
+    "type": "json",
+    "json": {
+      "file": "src/database/data.json"
+    },
+    "sqlite": {
+      "file": "src/database/xmd.sqlite"
+    },
+    "mongodb": {
+      "uri": "",
+      "dbName": "xmd"
+    }
+  }
+}
+```
+
+Valid `database.type` values are `json`, `sqlite`, and `mongodb`.
+
+For MongoDB, use environment variables for credentials instead of committing secrets:
+
+```bash
+MONGODB_URI="mongodb://127.0.0.1:27017" MONGODB_DB="xmd" npm start
+```
+
+The common database API is available through `src/lib/database` and keeps user, group, settings, and statistics storage independent from the selected backend.
+
 ## Plugin lifecycle
 
 Plugins can implement:
@@ -41,3 +79,7 @@ npm test
 ```
 
 The command directories are intentionally empty. The command ecosystem will be added after the core engine is stable.
+
+## Version
+
+The project remains **1.0.0**. Database integration is an internal code change, not a version change.
